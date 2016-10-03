@@ -6,13 +6,25 @@ Usage:
 from random import choice, randint
 import string
 from docopt import docopt
+import os
+
+
 def generate_str_csv(length=100000, filename='random_strs_1.csv'):
-    with open(filename, 'w+') as f:
-        for i in range (length):
+    if 'local_csv_tests' not in filename:
+        path = os.path.join('local_csv_tests', filename)
+    else:
+        path = filename
+
+    dirs, fname = os.path.split(path)
+    if dirs and not os.path.exists(dirs):
+        os.makedirs(dirs)
+
+    with open(path, 'w+') as f:
+        for i in range(length):
             if i % 10000 == 0:
-                print 'wrote element {} to file {}'.format(i + 1, filename)
-            f.write(''.join([choice(string.digits) for _ in range(randint(2, 8))]) + '\n')
-        print 'finished writing {} elements to file '.format(length, filename)
+                print 'wrote element {} to file {}'.format(i + 1, path)
+            f.write(''.join([choice(string.digits) for _ in range(6)]) + '\n')
+        print 'finished writing {} elements to file '.format(length, path)
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)

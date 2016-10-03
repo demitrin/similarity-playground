@@ -14,11 +14,8 @@ def get_file_names(num_sets):
     return ['set{}.csv'.format(i + 1) for i in range(num_sets)]
 
 
-def get_directory_name(num_sets, size_of_sets, num_buckets):
-    return 'simulation_sets-{}_size-{}_buckets-{}_date-{}'.format(
-        num_sets,
-        size_of_sets,
-        num_buckets,
+def get_directory_name():
+    return 'simulation_sets-{}'.format(
         datetime.datetime.now().strftime('%m-%d_%H-%M')
     )
 
@@ -26,7 +23,7 @@ def get_directory_name(num_sets, size_of_sets, num_buckets):
 def run_similarity_simulations(num_sets, size_of_sets, num_buckets):
     LOCAL_CSV_TESTS = 'local_csv_tests'
     # get file names
-    working_dir = os.path.join(LOCAL_CSV_TESTS, get_directory_name(num_sets, size_of_sets, num_buckets))
+    working_dir = os.path.join(LOCAL_CSV_TESTS, get_directory_name())
     file_names = map(lambda file_name: os.path.join(working_dir, file_name), get_file_names(num_sets))
 
     # create random datasets for files
@@ -41,9 +38,14 @@ def run_similarity_simulations(num_sets, size_of_sets, num_buckets):
 
     approx_similarities_errors = map(lambda similarity: abs(1 - (similarity['approx_similarity'] / similarity['exact_similarity'])), similarities)
     bucketed_approx_similarities_errors = map(lambda similarity: abs(1 - (similarity['bucketed_approx_similarity'] / similarity['exact_similarity'])), similarities)
-    print 'Average approx similarity error {}'.format(sum(approx_similarities_errors) / len(approx_similarities_errors))
-    print 'Average bucketed approx similarity error {}'.format(sum(bucketed_approx_similarities_errors) / len(bucketed_approx_similarities_errors))
+    approx_similarity_str = 'Average approx similarity error {}'.format(sum(approx_similarities_errors) / len(approx_similarities_errors))
+    bucketed_approx_similarity_str =  'Average bucketed approx similarity error {}'.format(sum(bucketed_approx_similarities_errors) / len(bucketed_approx_similarities_errors))
 
+    output_filename = os.path.join(working_dir, 'output.txt')
+    with open(output_filename, 'w+') as f:
+        f.write(approx_similarity_str + '\n')
+        f.write(bucketed_approx_similarity_str + '\n')
+        print 'wrote outputs to {}'.format(output_filename)
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     num_sets = int(arguments['<num_sets>'])
