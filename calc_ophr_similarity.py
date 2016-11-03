@@ -1,17 +1,17 @@
-"""Calculate Approximate Similarity
+"""Calculate OPHR Approximate Similarity
 
 Usage:
-  calc_approx_similarity.py <file1> <file2>
+  calc_ophr_similarity.py <file1> <file2>
 """
 import csv
 
 from docopt import docopt
 
-from datasketch import MinHash
+from datasketch import MinHashOPHR
 
 
-def calc_approx_similarity(file1, file2):
-    m1, m2 = MinHash(num_perm=128), MinHash(num_perm=128)
+def calc_ophr_similarity(file1, file2):
+    m1, m2 = MinHashOPHR(k_val=128), MinHashOPHR(k_val=128)
 
     with open(file1, 'r') as f:
         reader = csv.reader(f)
@@ -29,4 +29,4 @@ def calc_approx_similarity(file1, file2):
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
-    print calc_approx_similarity(file1=arguments['<file1>'], file2=arguments['<file2>'])
+    print calc_ophr_similarity(file1=arguments['<file1>'], file2=arguments['<file2>'])
