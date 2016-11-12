@@ -37,3 +37,6 @@ def base_lsh_mitdwh(mitdwh_path, minhash_cls):
 
     for minhash in minhashes:
         print lsh.query(minhash)
+
+    pool.close()
+    pool.join()
