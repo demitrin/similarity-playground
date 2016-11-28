@@ -43,7 +43,7 @@ def async_calc_jaccard_similarity(set_name__minhashes):
     return calc_jaccard_similarity(*set_name__minhashes)
 
 
-def base_lsh_mitdwh(mitdwh_path, minhash_cls, json_file_name, hash_func, hashstr=None):
+def base_mitdwh(mitdwh_path, minhash_cls, json_file_name, hash_func, hashstr=None):
     pool = Pool(4)
     args = map(lambda filename: (filename, minhash_cls, hash_func, hashstr), glob.glob(os.path.join(mitdwh_path, '*.csv')))
     csv_minhashes = pool.map(async_get_csv_minhashes, args)

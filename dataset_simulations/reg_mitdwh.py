@@ -6,13 +6,13 @@ Usage:
 
 from docopt import docopt
 
-from base_lsh_mitdwh import base_lsh_mitdwh
+from base_mitdwh import base_mitdwh
 from datasketch import MinHash
 import hashlib
 
 
 def reg_lsh_mitdwh(mitdwh_path, filename, hash_func):
-    base_lsh_mitdwh(mitdwh_path, MinHash, filename, hash_func)
+    base_mitdwh(mitdwh_path, MinHash, filename, hash_func)
 
 
 if __name__ == '__main__':

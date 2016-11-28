@@ -6,14 +6,14 @@ Usage:
 
 from docopt import docopt
 
-from base_lsh_mitdwh import base_lsh_mitdwh
+from base_mitdwh import base_mitdwh
 from datasketch import MinHashOPHR
 import hashlib
 import time
 
 
 def ophr_lsh_mitdwh(mitdwh_path, filename, hash_func, hashstr):
-    base_lsh_mitdwh(mitdwh_path, MinHashOPHR, filename, hash_func, hashstr=hashstr)
+    base_mitdwh(mitdwh_path, MinHashOPHR, filename, hash_func, hashstr=hashstr)
 
 
 if __name__ == '__main__':
