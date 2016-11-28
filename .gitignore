@@ -2,3 +2,6 @@ local_csv_tests
 *.swp
 *.pyc
 .idea
+*.csv
+*.json
+*.txt
