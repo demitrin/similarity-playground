@@ -18,7 +18,7 @@ def calc_exact_similarities(set_name, sets):
     s1 = sets[set_name]
     for sname, s2 in sets.iteritems():
         if sname != set_name:
-            actual_jaccard = float(len(set.intersection(s2))) / float(len(s1.union(s2)))
+            actual_jaccard = float(len(s1.intersection(s2))) / float(len(s1.union(s2)))
             similarities[sname] = actual_jaccard
     return set_name, similarities
 
