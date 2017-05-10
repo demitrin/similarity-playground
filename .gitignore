@@ -5,3 +5,4 @@ local_csv_tests
 *.csv
 *.json
 *.txt
+*.png
