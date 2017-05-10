@@ -1,21 +1,20 @@
 """Calculate Approximate Similarity
 
 Usage:
-  ophr_mitdwh.py <mitdwh_path>
+  minheap_mitdwh.py <mitdwh_path>
 """
-
-import gc
-import hashlib
-import time
 
 from docopt import docopt
 
 from base_mitdwh import base_mitdwh
-from datasketch import MinHashOPHR
+from datasketch import MinHashMinHeap
+import hashlib
+import time
+import gc
 
 
-def ophr_mitdwh(mitdwh_path, filename, hash_func, k):
-    base_mitdwh(mitdwh_path, MinHashOPHR, filename, hash_func, k)
+def minheap_mitdwh(mitdwh_path, filename, hash_func, k):
+    base_mitdwh(mitdwh_path, MinHashMinHeap, filename, hash_func, k)
 
 
 if __name__ == '__main__':
@@ -26,8 +25,7 @@ if __name__ == '__main__':
     for k in k_vals:
         for i in range(len(hashes)):
             start_time = time.time()
-            ophr_mitdwh(arguments['<mitdwh_path>'], 'ophr_minhash_mitdwh/k_{}/{}-{}-data.json'.format(k, k, hashes[i][1]),
-                        hashes[i][0], k)
-            with open('ophr_minhash_mitdwh/k_{}/{}-{}-time.txt'.format(k, k, hashes[i][1]), 'w+') as f:
+            minheap_mitdwh(arguments['<mitdwh_path>'], 'minheap_minhash_mitdwh/k_{}/{}-{}-data.json'.format(k, k, hashes[i][1]), hashes[i][0], k)
+            with open('minheap_minhash_mitdwh/k_{}/{}-{}-time.txt'.format(k, k, hashes[i][1]), 'w+') as f:
                 f.write("--- %s seconds ---" % (time.time() - start_time))
             gc.collect()
