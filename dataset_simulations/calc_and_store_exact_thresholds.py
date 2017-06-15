@@ -37,5 +37,5 @@ def calc_and_store_exact_thresholds(similarity_filename):
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
-    for filename in glob.glob('partition_mitdwh_10/*/*-sha1-data.json'):
+    for filename in glob.glob('*/*/*-sha1-data.json'):
         calc_and_store_exact_thresholds(filename)
