@@ -11,11 +11,11 @@ import time
 from docopt import docopt
 
 from base_mitdwh import base_mitdwh
-from datasketch import MinHashOPHR
+from datasketch import PartitionMinHash
 
 
 def partition_mitdwh(mitdwh_path, filename, hash_func, k):
-    base_mitdwh(mitdwh_path, MinHashOPHR, filename, hash_func, k)
+    base_mitdwh(mitdwh_path, PartitionMinHash, filename, hash_func, k)
 
 
 if __name__ == '__main__':
@@ -26,8 +26,8 @@ if __name__ == '__main__':
         for i in range(len(hashes)):
             start_time = time.time()
             partition_mitdwh(arguments['<mitdwh_path>'],
-                             'partition_mitdwh_10/k_{}/{}-{}-data.json'.format(k, k, hashes[i][1]),
+                             'partition_mitdwh/k_{}/{}-{}-data.json'.format(k, k, hashes[i][1]),
                         hashes[i][0], k)
-            with open('partition_mitdwh_10/k_{}/{}-{}-time.txt'.format(k, k, hashes[i][1]), 'w+') as f:
+            with open('partition_mitdwh/k_{}/{}-{}-time.txt'.format(k, k, hashes[i][1]), 'w+') as f:
                 f.write("--- %s seconds ---" % (time.time() - start_time))
             gc.collect()
