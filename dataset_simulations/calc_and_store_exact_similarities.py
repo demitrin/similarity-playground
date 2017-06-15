@@ -49,7 +49,7 @@ def calc_and_store_exact_similarities(mitdwh_path):
     for set_name, similarity_map in similarities:
         similarities_as_json[set_name] = similarity_map
 
-    with open('exact_mitwdwh_similarities.json', 'w+') as f:
+    with open('exact_mitdwh_similarities.json', 'w+') as f:
         f.write(json.dumps(similarities_as_json))
 
 

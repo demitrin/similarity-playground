@@ -31,7 +31,7 @@ def calc_and_store_exact_thresholds(similarity_filename):
         storage_path = os.path.join(*similarity_filename.split('/')[:-1])
     else:
         storage_path = ''
-        
+
     for i in range(len(thresholds)):
         storage_file = os.path.join(storage_path, 'similar_sets-{}.json'.format(str(thresholds[i])))
         print 'storing to ' + storage_file
@@ -41,5 +41,5 @@ def calc_and_store_exact_thresholds(similarity_filename):
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
-    for filename in glob.glob('exact_mitwdwh_similarities.json'):
+    for filename in glob.glob('exact_mitdwh_similarities.json'):
         calc_and_store_exact_thresholds(filename)
